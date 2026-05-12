@@ -171,7 +171,15 @@ export default function Questions() {
                   ) : (
                     <>
                       <span style={{ flex: 1, fontWeight: 600 }}>{q.keyword}</span>
-                      <button className="btn-secondary" onClick={() => startEdit(q)}>Edit</button>
+                      <button
+                        className="btn-icon"
+                        onClick={() => startEdit(q)}
+                        title="Edit"
+                        aria-label="Edit"
+                        style={{ fontSize: 16 }}
+                      >
+                        ✏
+                      </button>
                       <button className="btn-danger" onClick={() => deleteQuestion(q)}>Delete</button>
                     </>
                   )}
