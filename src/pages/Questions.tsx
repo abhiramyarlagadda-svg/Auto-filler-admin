@@ -1,10 +1,9 @@
 // ── Questions dashboard ─────────────────────────────────────────────────
-// Minimal admin UI: ONE input to add a question + the list of existing
-// questions with a delete button on each row. That's it.
+// Minimal admin UI: add a question, list questions, edit or delete each one.
 //
 // All writes go through the authenticated Supabase client. The anon key
-// alone cannot mutate the table — RLS policies allow INSERT/DELETE only
-// to the `authenticated` role.
+// alone cannot mutate the table — RLS policies allow INSERT/UPDATE/DELETE
+// only to the `authenticated` role.
 
 import { useEffect, useState, type FormEvent } from "react";
 import { supabase } from "../supabaseClient";
@@ -18,6 +17,11 @@ export default function Questions() {
 
   const [newQuestion, setNewQuestion] = useState("");
   const [adding, setAdding] = useState(false);
+
+  // Inline edit state — which row is being edited and its in-flight text
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editDraft, setEditDraft] = useState("");
+  const [savingEdit, setSavingEdit] = useState(false);
 
   // ── Fetch on mount ──────────────────────────────────────────────────
   useEffect(() => { loadQuestions(); }, []);
@@ -42,7 +46,6 @@ export default function Questions() {
     const text = newQuestion.trim();
     if (!text) return;
     setAdding(true);
-    // Only fill `keyword` — every other column uses its DB default.
     const { error: err } = await supabase
       .from("admin_questions")
       .insert([{ keyword: text }]);
@@ -51,6 +54,33 @@ export default function Questions() {
     setSuccess(`Added "${text}".`);
     setTimeout(() => setSuccess(null), 2500);
     setNewQuestion("");
+    loadQuestions();
+  }
+
+  // ── Edit ────────────────────────────────────────────────────────────
+  function startEdit(q: AdminQuestion) {
+    setEditingId(q.id);
+    setEditDraft(q.keyword);
+    setError(null);
+  }
+  function cancelEdit() {
+    setEditingId(null);
+    setEditDraft("");
+  }
+  async function saveEdit() {
+    if (!editingId) return;
+    const text = editDraft.trim();
+    if (!text) { setError("Question can't be empty."); return; }
+    setSavingEdit(true);
+    const { error: err } = await supabase
+      .from("admin_questions")
+      .update({ keyword: text })
+      .eq("id", editingId);
+    setSavingEdit(false);
+    if (err) { setError(err.message); return; }
+    setSuccess("Updated.");
+    setTimeout(() => setSuccess(null), 2000);
+    cancelEdit();
     loadQuestions();
   }
 
@@ -105,21 +135,49 @@ export default function Questions() {
           </div>
         ) : (
           <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
-            {questions.map((q) => (
-              <li
-                key={q.id}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  padding: "14px 20px",
-                  borderBottom: "1px solid var(--border)",
-                }}
-              >
-                <span style={{ fontWeight: 600 }}>{q.keyword}</span>
-                <button className="btn-danger" onClick={() => deleteQuestion(q)}>Delete</button>
-              </li>
-            ))}
+            {questions.map((q) => {
+              const isEditing = editingId === q.id;
+              return (
+                <li
+                  key={q.id}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8,
+                    padding: "14px 20px",
+                    borderBottom: "1px solid var(--border)",
+                  }}
+                >
+                  {isEditing ? (
+                    <>
+                      <input
+                        type="text"
+                        value={editDraft}
+                        onChange={(e) => setEditDraft(e.target.value)}
+                        autoFocus
+                        style={{ flex: 1 }}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") saveEdit();
+                          if (e.key === "Escape") cancelEdit();
+                        }}
+                      />
+                      <button className="btn-success" onClick={saveEdit} disabled={savingEdit || !editDraft.trim()}>
+                        {savingEdit ? <span className="spinner" /> : "Save"}
+                      </button>
+                      <button className="btn-secondary" onClick={cancelEdit} disabled={savingEdit}>
+                        Cancel
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <span style={{ flex: 1, fontWeight: 600 }}>{q.keyword}</span>
+                      <button className="btn-secondary" onClick={() => startEdit(q)}>Edit</button>
+                      <button className="btn-danger" onClick={() => deleteQuestion(q)}>Delete</button>
+                    </>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         )}
       </div>
