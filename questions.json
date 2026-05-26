@@ -1,14 +1,5 @@
 [
   {
-    "id": "04ab4956-33af-49b9-9f1f-39dc8177255f",
-    "keyword": "If you chose Greenhouse Employee, Greenhouse Event, or Other, please specify here",
-    "display_label": null,
-    "category": "default",
-    "placeholder": null,
-    "priority": 0,
-    "active": true
-  },
-  {
     "id": "93ebd72f-bdbf-42ce-ada5-cc91bd527a09",
     "keyword": "Are you subject to any non-compete, non-solicitation, or confidentiality agreements with your current or former employers that would impact your employment at Greenhouse?",
     "display_label": null,
