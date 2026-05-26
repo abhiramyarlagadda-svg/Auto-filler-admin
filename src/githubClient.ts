@@ -45,9 +45,17 @@ interface ReadResult {
 
 // Fetches the current questions.json + its sha. The branch query param is
 // what tells GitHub which ref to read.
+//
+// Cache discipline: `cache: "no-store"` tells the browser to skip its HTTP
+// cache, and the `&_=<timestamp>` param forces any intermediate proxy/CDN
+// (Cloudflare in front of api.github.com, ServiceWorker, etc.) to treat
+// each call as unique. Without this, subsequent reads after a write can
+// return the pre-write snapshot and the panel looks frozen.
 export async function readQuestions(pat: string): Promise<ReadResult> {
-  const res = await fetch(`${CONTENTS_URL}?ref=${GH_BRANCH}`, {
+  const bust = Date.now();
+  const res = await fetch(`${CONTENTS_URL}?ref=${GH_BRANCH}&_=${bust}`, {
     headers: ghHeaders(pat),
+    cache: "no-store",
   });
   if (res.status === 404) {
     // File doesn't exist yet — first-time setup. Caller can write the
