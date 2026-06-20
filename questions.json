@@ -1,5 +1,14 @@
 [
   {
+    "id": "1126d506-f31f-46fa-9c4c-9a4814149af3",
+    "keyword": "What is the Salary Expectations?",
+    "display_label": null,
+    "category": "default",
+    "placeholder": null,
+    "priority": 0,
+    "active": true
+  },
+  {
     "id": "93ebd72f-bdbf-42ce-ada5-cc91bd527a09",
     "keyword": "Are you subject to any non-compete, non-solicitation, or confidentiality agreements with your current or former employers that would impact your employment at Greenhouse?",
     "display_label": null,
