@@ -1,5 +1,14 @@
 [
   {
+    "id": "02f38f21-7460-47c7-b23e-1185b200df29",
+    "keyword": "Veteran Status",
+    "display_label": null,
+    "category": "default",
+    "placeholder": null,
+    "priority": 0,
+    "active": true
+  },
+  {
     "id": "52836c95-f7b2-4b39-868d-ab5cf250ac48",
     "keyword": "Disability",
     "display_label": null,
