@@ -1,5 +1,14 @@
 [
   {
+    "id": "1f5af5de-3830-4e37-9dce-8951788db365",
+    "keyword": "Ethnicity",
+    "display_label": null,
+    "category": "default",
+    "placeholder": null,
+    "priority": 0,
+    "active": true
+  },
+  {
     "id": "9ccacf71-307e-478d-9fbe-4cd471c922cf",
     "keyword": "Do you require sponsorship to work in Canada?",
     "display_label": null,
