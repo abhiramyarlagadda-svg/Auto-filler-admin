@@ -1,5 +1,14 @@
 [
   {
+    "id": "05f1c90d-3d0f-4d36-a3df-d0a1528cc3d9",
+    "keyword": "Willing to Relocate?",
+    "display_label": null,
+    "category": "default",
+    "placeholder": null,
+    "priority": 0,
+    "active": true
+  },
+  {
     "id": "f78ad08b-40e2-4032-8fab-f81e65a8352c",
     "keyword": "Are you authorized to work lawfully in the country for the position you are applying for?",
     "display_label": null,
