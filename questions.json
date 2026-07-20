@@ -1,5 +1,14 @@
 [
   {
+    "id": "9ccacf71-307e-478d-9fbe-4cd471c922cf",
+    "keyword": "Do you require sponsorship to work in Canada?",
+    "display_label": null,
+    "category": "default",
+    "placeholder": null,
+    "priority": 0,
+    "active": true
+  },
+  {
     "id": "26ad9322-d247-4e80-8e45-1b6644ad12b2",
     "keyword": "Are you legally eligible to work in Canada?",
     "display_label": null,
