@@ -1,5 +1,14 @@
 [
   {
+    "id": "f78ad08b-40e2-4032-8fab-f81e65a8352c",
+    "keyword": "Are you authorized to work lawfully in the country for the position you are applying for?",
+    "display_label": null,
+    "category": "default",
+    "placeholder": null,
+    "priority": 0,
+    "active": true
+  },
+  {
     "id": "02f38f21-7460-47c7-b23e-1185b200df29",
     "keyword": "Veteran Status",
     "display_label": null,
