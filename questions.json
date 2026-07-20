@@ -1,5 +1,14 @@
 [
   {
+    "id": "26ad9322-d247-4e80-8e45-1b6644ad12b2",
+    "keyword": "Are you legally eligible to work in Canada?",
+    "display_label": null,
+    "category": "default",
+    "placeholder": null,
+    "priority": 0,
+    "active": true
+  },
+  {
     "id": "1126d506-f31f-46fa-9c4c-9a4814149af3",
     "keyword": "What is the Salary Expectations?",
     "display_label": null,
