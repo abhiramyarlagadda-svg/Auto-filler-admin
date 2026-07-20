@@ -1,5 +1,14 @@
 [
   {
+    "id": "e8c362b4-4b41-4699-9c2e-b5627662c70d",
+    "keyword": "Veteran/Military Status",
+    "display_label": null,
+    "category": "default",
+    "placeholder": null,
+    "priority": 0,
+    "active": true
+  },
+  {
     "id": "acf6ff4c-b134-493c-a6b5-e81c871e24bc",
     "keyword": "LGBTQ+ Community Member",
     "display_label": null,
